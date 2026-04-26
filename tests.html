@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testes do Gerador de Senhas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .pass {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .fail {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Testes do Gerador de Senhas</h1>
+    <button onclick="runTests()">Executar Testes</button>
+    <div id="testResults"></div>
+
+    <script>
+        // Constantes e funções do gerador de senhas
+        const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
+        const numberChars = '0123456789';
+        const specialChars = '!@#$%^&*()_+-=[]{}|;:,.<>?/~`';
+
+        // Simular elementos DOM para testes
+        let mockUppercase = true;
+        let mockLowercase = true;
+        let mockNumbers = true;
+        let mockSpecial = true;
+        let mockSize = 16;
+        let mockErrorMessage = '';
+
+        // Função para validar opções
+        function validateCharsetOptions() {
+            const hasAtLeastOne = mockUppercase || mockLowercase || mockNumbers || mockSpecial;
+            if (!hasAtLeastOne) {
+                mockErrorMessage = '⚠️ Selecione pelo menos uma opção de caractere para gerar a senha.';
+                return false;
+            } else {
+                mockErrorMessage = '';
+                return true;
+            }
+        }
+
+        // Função de geração de senha adaptada para testes
+        function generatePassword(size, uppercase, lowercase, numbers, special) {
+            mockUppercase = uppercase;
+            mockLowercase = lowercase;
+            mockNumbers = numbers;
+            mockSpecial = special;
+            mockSize = size;
+
+            if (!validateCharsetOptions()) {
+                return null; // Indica erro
+            }
+
+            let charset = '';
+            if (mockUppercase) charset += uppercaseChars;
+            if (mockLowercase) charset += lowercaseChars;
+            if (mockNumbers) charset += numberChars;
+            if (mockSpecial) charset += specialChars;
+
+            let password = '';
+            for (let i = 0; i < mockSize; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+
+            return password;
+        }
+
+        // Funções auxiliares para testes
+        function hasOnlyNumbers(password) {
+            return /^[0-9]+$/.test(password);
+        }
+
+        function hasOnlyLetters(password) {
+            return /^[a-zA-Z]+$/.test(password);
+        }
+
+        function hasOnlyUppercase(password) {
+            return /^[A-Z]+$/.test(password);
+        }
+
+        function hasOnlyLowercase(password) {
+            return /^[a-z]+$/.test(password);
+        }
+
+        function hasOnlySpecial(password) {
+            return /^[!@#$%^&*()_+\-=\[\]{}|;:,.<>?/~`]+$/.test(password);
+        }
+
+        // Função para executar testes
+        function runTests() {
+            const results = [];
+            let testCount = 0;
+
+            // Teste 1: Tamanho correto
+            testCount++;
+            const pwd1 = generatePassword(10, true, true, true, true);
+            if (pwd1 && pwd1.length === 10) {
+                results.push({ name: 'Tamanho correto (10)', status: 'pass' });
+            } else {
+                results.push({ name: 'Tamanho correto (10)', status: 'fail' });
+            }
+
+            // Teste 2: Só números
+            testCount++;
+            const pwd2 = generatePassword(8, false, false, true, false);
+            if (pwd2 && hasOnlyNumbers(pwd2)) {
+                results.push({ name: 'Só números', status: 'pass' });
+            } else {
+                results.push({ name: 'Só números', status: 'fail' });
+            }
+
+            // Teste 3: Só letras maiúsculas
+            testCount++;
+            const pwd3 = generatePassword(8, true, false, false, false);
+            if (pwd3 && hasOnlyUppercase(pwd3)) {
+                results.push({ name: 'Só letras maiúsculas', status: 'pass' });
+            } else {
+                results.push({ name: 'Só letras maiúsculas', status: 'fail' });
+            }
+
+            // Teste 4: Só letras minúsculas
+            testCount++;
+            const pwd4 = generatePassword(8, false, true, false, false);
+            if (pwd4 && hasOnlyLowercase(pwd4)) {
+                results.push({ name: 'Só letras minúsculas', status: 'pass' });
+            } else {
+                results.push({ name: 'Só letras minúsculas', status: 'fail' });
+            }
+
+            // Teste 5: Só caracteres especiais
+            testCount++;
+            const pwd5 = generatePassword(8, false, false, false, true);
+            if (pwd5 && hasOnlySpecial(pwd5)) {
+                results.push({ name: 'Só caracteres especiais', status: 'pass' });
+            } else {
+                results.push({ name: 'Só caracteres especiais', status: 'fail' });
+            }
+
+            // Teste 6: Erro quando nenhuma opção selecionada
+            testCount++;
+            const pwd6 = generatePassword(8, false, false, false, false);
+            if (pwd6 === null && mockErrorMessage !== '') {
+                results.push({ name: 'Erro quando nenhuma opção selecionada', status: 'pass' });
+            } else {
+                results.push({ name: 'Erro quando nenhuma opção selecionada', status: 'fail' });
+            }
+
+            // Teste 7: Senhas diferentes a cada chamada
+            testCount++;
+            const pwd7a = generatePassword(16, true, true, true, true);
+            const pwd7b = generatePassword(16, true, true, true, true);
+            if (pwd7a && pwd7b && pwd7a !== pwd7b) {
+                results.push({ name: 'Senhas diferentes a cada chamada', status: 'pass' });
+            } else {
+                results.push({ name: 'Senhas diferentes a cada chamada', status: 'fail' });
+            }
+
+            // Exibir resultados
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = results.map(result => 
+                `<div class="test-result ${result.status}">${result.name}: ${result.status === 'pass' ? 'PASSOU' : 'FALHOU'}</div>`
+            ).join('');
+        }
+    </script>
+</body>
+</html>

@@ -15,7 +15,11 @@ Este projeto é um gerador de senhas web-based que ajuda usuários a criar senha
 - **Geração de Senhas Personalizáveis**: Escolha entre letras maiúsculas, minúsculas, números e caracteres especiais.
 - **Controle de Tamanho**: Ajuste o comprimento da senha de 4 a 64 caracteres via slider.
 - **Indicador de Força**: Avaliação visual da força da senha (Fraca, Média, Forte).
-- **Histórico de Senhas**: Armazena até 5 senhas recentes com opção de cópia.
+- **Histórico de Senhas em Memória**: Armazena até 5 senhas recentes durante a sessão, sem persistir no navegador.
+- **Botão Limpar Histórico**: Permite apagar manualmente o histórico a qualquer momento.
+- **Limpeza Automática de Histórico**: O histórico é removido ao fechar a aba ou o navegador.
+- **Alternância de Tema**: Toggle escuro/claro com ícone de lua/sol e preferência salva no `localStorage`.
+- **Alerta de Senha Fraca**: Barra vermelha exibe aviso automático quando a senha tem menos de 8 caracteres ou usa apenas um tipo de caractere.
 - **Copiar para Clipboard**: Botão para copiar a senha gerada facilmente.
 - **Validação de Opções**: Impede geração sem pelo menos um tipo de caractere selecionado.
 - **Testes Automatizados**: Arquivo `tests.html` para validar funcionalidades com JavaScript puro.

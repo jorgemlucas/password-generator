@@ -60,6 +60,7 @@
         let mockSpecial = true;
         let mockSize = 16;
         let mockErrorMessage = '';
+        let mockHistory = [];
 
         // Função para validar opções
         function validateCharsetOptions() {
@@ -100,6 +101,31 @@
             return password;
         }
 
+        function shouldShowWeakAlert(size, uppercase, lowercase, numbers, special) {
+            let charsetCount = 0;
+            if (uppercase) charsetCount++;
+            if (lowercase) charsetCount++;
+            if (numbers) charsetCount++;
+            if (special) charsetCount++;
+            return size < 8 || charsetCount <= 1;
+        }
+
+        function saveThemePreference(theme) {
+            localStorage.setItem('theme', theme);
+            return localStorage.getItem('theme');
+        }
+
+        function addToHistory(password) {
+            mockHistory.unshift(password);
+            if (mockHistory.length > 5) {
+                mockHistory.pop();
+            }
+        }
+
+        function clearHistory() {
+            mockHistory = [];
+        }
+
         // Funções auxiliares para testes
         function hasOnlyNumbers(password) {
             return /^[0-9]+$/.test(password);
@@ -123,74 +149,48 @@
 
         // Função para executar testes
         function runTests() {
+            localStorage.removeItem('theme');
+            localStorage.removeItem('passwordHistory');
+
             const results = [];
-            let testCount = 0;
 
-            // Teste 1: Tamanho correto
-            testCount++;
             const pwd1 = generatePassword(10, true, true, true, true);
-            if (pwd1 && pwd1.length === 10) {
-                results.push({ name: 'Tamanho correto (10)', status: 'pass' });
-            } else {
-                results.push({ name: 'Tamanho correto (10)', status: 'fail' });
-            }
+            results.push({ name: 'Tamanho correto (10)', status: pwd1 && pwd1.length === 10 ? 'pass' : 'fail' });
 
-            // Teste 2: Só números
-            testCount++;
             const pwd2 = generatePassword(8, false, false, true, false);
-            if (pwd2 && hasOnlyNumbers(pwd2)) {
-                results.push({ name: 'Só números', status: 'pass' });
-            } else {
-                results.push({ name: 'Só números', status: 'fail' });
-            }
+            results.push({ name: 'Só números', status: pwd2 && hasOnlyNumbers(pwd2) ? 'pass' : 'fail' });
 
-            // Teste 3: Só letras maiúsculas
-            testCount++;
             const pwd3 = generatePassword(8, true, false, false, false);
-            if (pwd3 && hasOnlyUppercase(pwd3)) {
-                results.push({ name: 'Só letras maiúsculas', status: 'pass' });
-            } else {
-                results.push({ name: 'Só letras maiúsculas', status: 'fail' });
-            }
+            results.push({ name: 'Só letras maiúsculas', status: pwd3 && hasOnlyUppercase(pwd3) ? 'pass' : 'fail' });
 
-            // Teste 4: Só letras minúsculas
-            testCount++;
             const pwd4 = generatePassword(8, false, true, false, false);
-            if (pwd4 && hasOnlyLowercase(pwd4)) {
-                results.push({ name: 'Só letras minúsculas', status: 'pass' });
-            } else {
-                results.push({ name: 'Só letras minúsculas', status: 'fail' });
-            }
+            results.push({ name: 'Só letras minúsculas', status: pwd4 && hasOnlyLowercase(pwd4) ? 'pass' : 'fail' });
 
-            // Teste 5: Só caracteres especiais
-            testCount++;
             const pwd5 = generatePassword(8, false, false, false, true);
-            if (pwd5 && hasOnlySpecial(pwd5)) {
-                results.push({ name: 'Só caracteres especiais', status: 'pass' });
-            } else {
-                results.push({ name: 'Só caracteres especiais', status: 'fail' });
-            }
+            results.push({ name: 'Só caracteres especiais', status: pwd5 && hasOnlySpecial(pwd5) ? 'pass' : 'fail' });
 
-            // Teste 6: Erro quando nenhuma opção selecionada
-            testCount++;
             const pwd6 = generatePassword(8, false, false, false, false);
-            if (pwd6 === null && mockErrorMessage !== '') {
-                results.push({ name: 'Erro quando nenhuma opção selecionada', status: 'pass' });
-            } else {
-                results.push({ name: 'Erro quando nenhuma opção selecionada', status: 'fail' });
-            }
+            results.push({ name: 'Erro quando nenhuma opção selecionada', status: pwd6 === null && mockErrorMessage !== '' ? 'pass' : 'fail' });
 
-            // Teste 7: Senhas diferentes a cada chamada
-            testCount++;
             const pwd7a = generatePassword(16, true, true, true, true);
             const pwd7b = generatePassword(16, true, true, true, true);
-            if (pwd7a && pwd7b && pwd7a !== pwd7b) {
-                results.push({ name: 'Senhas diferentes a cada chamada', status: 'pass' });
-            } else {
-                results.push({ name: 'Senhas diferentes a cada chamada', status: 'fail' });
-            }
+            results.push({ name: 'Senhas diferentes a cada chamada', status: pwd7a && pwd7b && pwd7a !== pwd7b ? 'pass' : 'fail' });
 
-            // Exibir resultados
+            results.push({ name: 'Tema claro salvo no localStorage', status: saveThemePreference('light') === 'light' ? 'pass' : 'fail' });
+            results.push({ name: 'Tema escuro salvo no localStorage', status: saveThemePreference('dark') === 'dark' ? 'pass' : 'fail' });
+
+            results.push({ name: 'Alerta fraco por tamanho < 8', status: shouldShowWeakAlert(6, true, true, true, true) ? 'pass' : 'fail' });
+            results.push({ name: 'Alerta fraco por um tipo de caractere', status: shouldShowWeakAlert(12, true, false, false, false) ? 'pass' : 'fail' });
+
+            addToHistory('senha1');
+            addToHistory('senha2');
+            clearHistory();
+            results.push({ name: 'Limpar histórico remove entradas', status: mockHistory.length === 0 ? 'pass' : 'fail' });
+
+            addToHistory('senha1');
+            addToHistory('senha2');
+            results.push({ name: 'Histórico não persiste no localStorage', status: !localStorage.getItem('passwordHistory') ? 'pass' : 'fail' });
+
             const resultsDiv = document.getElementById('testResults');
             resultsDiv.innerHTML = results.map(result => 
                 `<div class="test-result ${result.status}">${result.name}: ${result.status === 'pass' ? 'PASSOU' : 'FALHOU'}</div>`

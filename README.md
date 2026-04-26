@@ -20,6 +20,7 @@ Este projeto é um gerador de senhas web-based que ajuda usuários a criar senha
 - **Limpeza Automática de Histórico**: O histórico é removido ao fechar a aba ou o navegador.
 - **Alternância de Tema**: Toggle escuro/claro com ícone de lua/sol e preferência salva no `localStorage`.
 - **Alerta de Senha Fraca**: Barra vermelha exibe aviso automático quando a senha tem menos de 8 caracteres ou usa apenas um tipo de caractere.
+- **Aleatoriedade Segura**: A geração de senha usa a API Web Crypto (`crypto.getRandomValues`) em vez de `Math.random` para melhorar a segurança.
 - **Copiar para Clipboard**: Botão para copiar a senha gerada facilmente.
 - **Validação de Opções**: Impede geração sem pelo menos um tipo de caractere selecionado.
 - **Testes Automatizados**: Arquivo `tests.html` para validar funcionalidades com JavaScript puro.
@@ -29,6 +30,7 @@ Este projeto é um gerador de senhas web-based que ajuda usuários a criar senha
 - **HTML5**: Estrutura da página web.
 - **CSS3**: Estilização responsiva e moderna com gradientes e animações.
 - **JavaScript (ES6)**: Lógica de geração de senhas, validação e interatividade.
+- **Web Crypto API**: Geração de números aleatórios seguros para fortalecer a senha gerada.
 - **GitHub Copilot**: Assistência na codificação e geração de ideias.
 
 ## 🚀 Como Usar

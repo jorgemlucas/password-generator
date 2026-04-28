@@ -81,6 +81,8 @@ O GitHub Copilot desempenhou um papel fundamental no desenvolvimento deste proje
 
 O uso do Copilot permitiu focar mais na lógica de negócio e design, enquanto a IA cuidava de tarefas repetitivas e sugeria boas práticas de desenvolvimento.
 
+Para mim, foi uma experiência realmente enriquecedora, pois foi a primeira vez que utilizei uma IDE integrada a um agente de IA. Enfrentei algumas dificuldades ao longo do caminho, mas, depois de erros e acertos — e com a ajuda do próprio agente — as barreiras foram sendo superadas. Ao final do processo, ficou a satisfação de ter construído algo. É verdade que o resultado foi simples, até modesto se comparado aos projetos dos colegas, mas trouxe aprendizados valiosos e a sensação de estar participando de algo novo.
+
 ## 📄 Licença
 
 Este projeto é parte do curso de Engenharia de Software com IA da FGV e está disponível sob a licença MIT.

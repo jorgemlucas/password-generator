@@ -2,6 +2,7 @@
 
 ## Caso de Uso 1 - Gerar Senha Personalizada
 - Ator: Usuário
+- Requisitos relacionados: RF01, RF04, RF07
 - Pré-condição: O usuário acessa a página do gerador de senhas.
 - Fluxo principal:
   1. O usuário define o tamanho da senha.
@@ -14,6 +15,7 @@
 
 ## Caso de Uso 2 - Verificar Força da Senha
 - Ator: Usuário
+- Requisitos relacionados: RF02
 - Pré-condição: Uma senha foi gerada.
 - Fluxo principal:
   1. O sistema avalia a senha gerada.
@@ -24,6 +26,7 @@
 
 ## Caso de Uso 3 - Copiar Senha para a Área de Transferência
 - Ator: Usuário
+- Requisitos relacionados: RF03
 - Pré-condição: Uma senha foi gerada e exibida.
 - Fluxo principal:
   1. O usuário clica no botão de copiar.
@@ -33,6 +36,7 @@
 
 ## Caso de Uso 4 - Consultar Histórico de Senhas Geradas
 - Ator: Usuário
+- Requisitos relacionados: RF05
 - Pré-condição: Ao menos uma senha foi gerada na sessão.
 - Fluxo principal:
   1. O usuário visualiza a seção de histórico de senhas.
@@ -42,6 +46,7 @@
 
 ## Caso de Uso 5 - Limpar Histórico de Senhas
 - Ator: Usuário
+- Requisitos relacionados: RF05
 - Pré-condição: O histórico possui pelo menos uma senha.
 - Fluxo principal:
   1. O usuário clica no botão de limpar histórico.
@@ -51,6 +56,7 @@
 
 ## Caso de Uso 6 - Alternar Tema Claro/Escuro
 - Ator: Usuário
+- Requisitos relacionados: RF06
 - Pré-condição: O usuário está na página do gerador de senhas.
 - Fluxo principal:
   1. O usuário clica no botão de alternância de tema.
@@ -60,6 +66,7 @@
 
 ## Caso de Uso 7 - Receber Mensagem de Erro de Validação
 - Ator: Usuário
+- Requisitos relacionados: RF07
 - Pré-condição: O usuário tenta gerar uma senha.
 - Fluxo principal:
   1. O usuário não seleciona nenhum tipo de caractere.
@@ -70,6 +77,7 @@
 
 ## Caso de Uso 8 - Gerar Senha Rapidamente
 - Ator: Usuário
+- Requisitos relacionados: RF01, RF04
 - Pré-condição: Parâmetros válidos selecionados.
 - Fluxo principal:
   1. O usuário define os parâmetros de geração.

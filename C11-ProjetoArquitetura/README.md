@@ -160,10 +160,5 @@ Ao analisar uma arquitetura, atribua, quando possível, uma avaliação qualitat
 Não utilize notas numéricas apenas para aparentar precisão. Explique o motivo de cada avaliação.
 
 ---
-## 10. Fora de escopo (não faça nesta etapa):
-- Não proponha arquitetura, tecnologias ou padrões.
-- Não responda às próprias perguntas.
-
----
-
-## 11. Formato: Markdown com seções numeradas e bullets curtos
+## 10. Formato:
+- Markdown com seções numeradas e bullets curtos

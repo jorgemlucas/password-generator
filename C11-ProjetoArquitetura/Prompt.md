@@ -1,4 +1,4 @@
-# C11 - Projeto de Arquitetura - Prompt Agente Arquiteto de Software
+# C11 - Projeto&Arquitetura - Prompt Agente Arquiteto de Software
 
 ## 1. Papel
 

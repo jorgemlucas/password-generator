@@ -259,7 +259,8 @@ O objetivo desta documentação é justamente evitar que essas decisões sejam t
 | Limite de tamanho          | Pendente        | Requer definição funcional              |
 | Navegadores suportados     | Pendente        | Requer definição não funcional          |
 
-Sobre a geração da senha local no navegador evidenciando as ALTERNATIVAS e porque a primeira foi escolhida.
+Das decisões acima evidenciando as **ALTERNATIVAS** de uma delas - **Geração da senha local no navegador** -  
+e porque a primeira alternativa foi escolhida. 
 
 | Alternativa         | Segurança	| Privacidade	| Complexidade   | Custo	  | Decisão    |
 |---------------------|-------------|-------------- |----------------|------------|------------|

@@ -246,9 +246,21 @@ Antes da implementação, as seguintes decisões devem ser transformadas em requ
 
 O objetivo desta documentação é justamente evitar que essas decisões sejam tomadas implicitamente pelo agente de desenvolvimento.
 
-## 12. Tabela de DECISÔES ARQUITETURAIS
+## 13. Tabela de DECISOES ARQUITETURAIS
 
-## 13. Uso de GenAI
+| Decisão                    | Status          | Motivo                                  |
+| -------------------------- | --------------- | --------------------------------------- |
+| Geração local no navegador | Decidida        | Evitar envio da senha para servidor     |
+| Web Crypto API             | Decidida        | Aleatoriedade adequada para credenciais |
+| Backend                    | Fora do escopo  | Não é necessário para a geração         |
+| Banco de dados             | Fora do escopo  | Senhas não devem ser persistidas        |
+| Histórico                  | Decisão inicial | Apenas durante a sessão                 |
+| Avaliação de força         | Pendente        | Regra ainda precisa ser especificada    |
+| Limite de tamanho          | Pendente        | Requer definição funcional              |
+| Navegadores suportados     | Pendente        | Requer definição não funcional          |
+
+
+## 14. Uso de GenAI
 A GenAI foi utilizada como apoio para:
 
 - identificar possíveis componentes do sistema;
@@ -260,7 +272,7 @@ A GenAI foi utilizada como apoio para:
 
 A saída do modelo não foi considerada uma especificação definitiva. As propostas foram revisadas e ajustadas de acordo com os objetivos do sistema e com os princípios de segurança e simplicidade definidos para o projeto.
 
-## 14. Objetivo da documentação para futuros agentes
+## 15. Objetivo da documentação para futuros agentes
 Esta documentação deve funcionar como contexto arquitetural para futuros agentes de desenvolvimento.
 
 Um agente deverá conseguir identificar:

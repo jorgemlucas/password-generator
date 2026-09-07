@@ -246,6 +246,8 @@ Antes da implementação, as seguintes decisões devem ser transformadas em requ
 
 O objetivo desta documentação é justamente evitar que essas decisões sejam tomadas implicitamente pelo agente de desenvolvimento.
 
+## 12. Tabela de DECISÔES ARQUITETURAIS
+
 ## 13. Uso de GenAI
 A GenAI foi utilizada como apoio para:
 

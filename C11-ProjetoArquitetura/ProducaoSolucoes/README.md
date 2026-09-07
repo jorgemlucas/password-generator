@@ -259,6 +259,14 @@ O objetivo desta documentação é justamente evitar que essas decisões sejam t
 | Limite de tamanho          | Pendente        | Requer definição funcional              |
 | Navegadores suportados     | Pendente        | Requer definição não funcional          |
 
+Sobre a geração da senha local no navegador evidenciando as ALTERNATIVAS e porque a primeira foi escolhida.
+
+| Alternativa         | Segurança	| Privacidade	| Complexidade   | Custo	  | Decisão    |
+|---------------------|-------------|-------------- |----------------|------------|------------|
+| Gerar no navegador  |	Alta	    |    Alta	    |  Baixa	     |  Baixo     | Escolhida  |
+| Backend próprio	  | Média/Alta	|    Média	    |  Média	     |  Médio	  | Rejeitada  |
+| Serviço externo	  | Variável	|    Baixa	    |  Baixa	     |  Variável  | Rejeitada  |
+
 
 ## 14. Uso de GenAI
 A GenAI foi utilizada como apoio para:

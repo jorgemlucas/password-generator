@@ -130,37 +130,27 @@ Essas questões devem ser transformadas em decisões documentadas antes da imple
 A partir da descrição acima, foi utilizado GenAI para propor uma visão arquitetural em Mermaid.
 
 ```mermaid
-C4Container
-    title Container - Gerador de Senhas Seguras
+flowchart LR
+    user[Usuário]
 
-    Person(user, "Usuário", "Pessoa que deseja gerar uma senha segura")
+    subgraph passwordSystem[Gerador de Senhas]
+        webUI[Interface Web]
+        passwordGenerator[Gerador de Senhas]
+        strengthEvaluator[Avaliador de Força]
+        sessionHistory[Histórico da Sessão]
+    end
 
-    System_Boundary(passwordSystem, "Gerador de Senhas") {
+    webCrypto[Web Crypto API]
+    clipboard[Clipboard API]
 
-        Container(webUI, "Interface Web", "HTML/CSS/JavaScript",
-            "Recebe as configurações do usuário, apresenta a senha e controla a interação")
-
-        Container(passwordGenerator, "Gerador de Senhas", "JavaScript",
-            "Valida as configurações e gera a senha utilizando aleatoriedade criptográfica")
-
-        Container(strengthEvaluator, "Avaliador de Força", "JavaScript",
-            "Classifica a força da senha de acordo com regras definidas")
-
-        Container(sessionHistory, "Histórico da Sessão", "Memória do navegador",
-            "Mantém temporariamente as senhas geradas durante a sessão")
-    }
-
-    System_Ext(webCrypto, "Web Crypto API", "API do navegador para geração de valores aleatórios criptograficamente seguros")
-    System_Ext(clipboard, "Clipboard API", "API do navegador para copiar a senha")
-
-    Rel(user, webUI, "Configura e solicita geração")
-    Rel(webUI, passwordGenerator, "Solicita geração")
-    Rel(passwordGenerator, webCrypto, "Obtém aleatoriedade segura")
-    Rel(passwordGenerator, strengthEvaluator, "Envia senha para avaliação")
-    Rel(passwordGenerator, sessionHistory, "Registra senha na sessão")
-    Rel(webUI, clipboard, "Copia senha")
-    Rel(strengthEvaluator, webUI, "Retorna classificação")
-    Rel(sessionHistory, webUI, "Fornece histórico")
+    user -->|Configura e solicita geração| webUI
+    webUI -->|Solicita geração| passwordGenerator
+    passwordGenerator -->|Obtém aleatoriedade segura| webCrypto
+    passwordGenerator -->|Envia senha para avaliação| strengthEvaluator
+    passwordGenerator -->|Registra senha na sessão| sessionHistory
+    webUI -->|Copia senha| clipboard
+    strengthEvaluator -->|Retorna classificação| webUI
+    sessionHistory -->|Fornece histórico| webUI
 ```
 
 ### Observação sobre o diagrama
